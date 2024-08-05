@@ -13,5 +13,5 @@ search_tool = Tool(
 
 code_tool = CodeDocsSearchTool(docs_url='https://d2lang.com/tour/')
 
-csv_tool = CSVSearchTool(csv='d2lang_data.csv')
+csv_tool = CSVSearchTool(csv='/home/jovyan/crewai with rag/d2lang_data.csv')
 
