@@ -1,0 +1,36 @@
+Give d2lang code for the given cloud architecture. This cloud architecture utilizes a load balancer (ELB) to distribute traffic across two web servers (EC2) running a web application. The web servers access a relational database (RDS) for data persistence. A content delivery network (CDN) caches static content, reducing latency for users. The ELB distributes traffic to the web servers, while the web servers connect to the RDS for data access. The CDN serves static content directly to users, minimizing the need to access the web servers for these resources. This architecture ensures high availability, scalability, and improved performance for the application.
+
+## result
+
+vars: {
+  d2-config: {
+    layout-engine: elk
+    theme-id: 300
+  }
+}
+cloud: {
+  ELB: {
+    shape: rectangle
+  }
+  Web Server 1: {
+    shape: rectangle
+  }
+  Web Server 2: {
+    shape: rectangle
+  }
+  RDS Instance: {
+    shape: cylinder
+  }
+  CDN: {
+    shape: cloud
+  }
+
+  ELB -> Web Server 1: distribute traffic
+  ELB -> Web Server 2: distribute traffic
+  Web Server 1 -> RDS Instance: access data
+  Web Server 2 -> RDS Instance: access data
+  CDN -> Web Server 1: cache static content
+  CDN -> Web Server 2: cache static content
+}
+-----------------------------
+{'total_tokens': 1580, 'prompt_tokens': 0, 'completion_tokens': 1580, 'successful_requests': 10}

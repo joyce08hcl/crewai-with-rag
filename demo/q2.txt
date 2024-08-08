@@ -1,0 +1,175 @@
+Give d2lang code for the given cloud architecture. the IoT Core instances (core1, core2, core3) send data to the pubsub topic, which then forwards the data to the data flow instance. This instance processes the data and routes it to various targets: bq and storage for data lake purposes, engine and bigtable for event-driven processing, and func and appengine for serverless operations. This architecture ensures a scalable and efficient data collection and processing system on GCP
+
+# result of the user_input
+
+```
+vars: {
+  d2-config: {
+    layout-engine: elk
+    theme-id: 300
+  }
+}
+infrastructure: {
+  IoT-Core: {
+    core1: {
+      type: "iot-core"
+      shape: rectangle
+    }
+    core2: {
+      type: "iot-core"
+      shape: rectangle
+    }
+    core3: {
+      type: "iot-core"
+      shape: rectangle
+    }
+  }
+  PubSub: {
+    topic: {
+      type: "pubsub-topic"
+      shape: circle
+    }
+  }
+  DataFlow: {
+    instance: {
+      type: "dataflow-instance"
+      shape: cylinder
+    }
+  }
+  BigQuery: {
+    bq: {
+      type: "bigquery-dataset"
+      shape: rectangle
+    }
+  }
+  Storage: {
+    storage: {
+      type: "storage-bucket"
+      shape: rectangle
+    }
+  }
+  Engine: {
+    engine: {
+      type: "engine-instance"
+      shape: cylinder
+    }
+  }
+  Bigtable: {
+    bigtable: {
+      type: "bigtable-instance"
+      shape: cylinder
+    }
+  }
+  Func: {
+    func: {
+      type: "cloud-function"
+      shape: rectangle
+    }
+  }
+  AppEngine: {
+    appengine: {
+      type: "appengine-instance"
+      shape: cylinder
+    }
+  }
+}
+
+connections: {
+  IoT-Core.core1 -> PubSub.topic: send data
+  IoT-Core.core2 -> PubSub.topic: send data
+  IoT-Core.core3 -> PubSub.topic: send data
+  PubSub.topic -> DataFlow.instance: forward data
+  DataFlow.instance -> BigQuery.bq: process data
+  DataFlow.instance -> Storage.storage: store data
+  DataFlow.instance -> Engine.engine: process events
+  DataFlow.instance -> Bigtable.bigtable: store data
+  DataFlow.instance -> Func.func: trigger function
+  DataFlow.instance -> AppEngine.appengine: deploy application
+}
+
+```
+
+vars: {
+  d2-config: {
+    layout-engine: elk
+    theme-id: 300
+  }
+}
+infrastructure: {
+  IoT-Core: {
+    core1: {
+      type: "iot-core"
+      shape: rectangle
+    }
+    core2: {
+      type: "iot-core"
+      shape: rectangle
+    }
+    core3: {
+      type: "iot-core"
+      shape: rectangle
+    }
+  }
+  PubSub: {
+    topic: {
+      type: "pubsub-topic"
+      shape: circle
+    }
+  }
+  DataFlow: {
+    instance: {
+      type: "dataflow-instance"
+      shape: cylinder
+    }
+  }
+  BigQuery: {
+    bq: {
+      type: "bigquery-dataset"
+      shape: rectangle
+    }
+  }
+  Storage: {
+    storage: {
+      type: "storage-bucket"
+      shape: rectangle
+    }
+  }
+  Engine: {
+    engine: {
+      type: "engine-instance"
+      shape: cylinder
+    }
+  }
+  Bigtable: {
+    bigtable: {
+      type: "bigtable-instance"
+      shape: cylinder
+    }
+  }
+  Func: {
+    func: {
+      type: "cloud-function"
+      shape: rectangle
+    }
+  }
+  AppEngine: {
+    appengine: {
+      type: "appengine-instance"
+      shape: cylinder
+    }
+  }
+}
+
+connections: {
+  IoT-Core.core1 -> PubSub.topic: send data
+  IoT-Core.core2 -> PubSub.topic: send data
+  IoT-Core.core3 -> PubSub.topic: send data
+  PubSub.topic -> DataFlow.instance: forward data
+  DataFlow.instance -> BigQuery.bq: process data
+  DataFlow.instance -> Storage.storage: store data
+  DataFlow.instance -> Engine.engine: process events
+  DataFlow.instance -> Bigtable.bigtable: store data
+  DataFlow.instance -> Func.func: trigger function
+  DataFlow.instance -> AppEngine.appengine: deploy application
+}
+

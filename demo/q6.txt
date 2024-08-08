@@ -1,0 +1,46 @@
+A high-availability web application running on Azure Virtual Network, using Azure Load Balancer for load balancing, Azure Storage for storage, and Kubernetes for container orchestration. The application consists of multiple layers, including a load balancer, multiple web servers, and a storage server. The load balancer distributes traffic across the web servers, while the storage server provides persistent storage for the application's data. Kubernetes provides a container orchestration environment for managing and scaling the application.
+
+
+## result
+
+vars: {
+  d2-config: {
+    layout-engine: elk
+    theme-id: 300
+  }
+}
+network: {
+  Azure Virtual Network: {
+    shape: cloud
+  }
+  Load Balancer: {
+    shape: rectangle
+  }
+  Web Servers: {
+    shape: cylinder
+    style.multiple: true
+  }
+  Storage Server: {
+    shape: document
+  }
+  Kubernetes Cluster: {
+    shape: circle
+  }
+  AKS enabled by Azure Arc: {
+    shape: step
+  }
+  Internal Load Balancer: {
+    shape: rectangle
+  }
+
+  Azure Virtual Network -> Load Balancer: hosts
+  Load Balancer -> Web Servers: distributes traffic
+  Web Servers -> Kubernetes Cluster: managed by
+  Kubernetes Cluster -> AKS enabled by Azure Arc: deployed on
+  AKS enabled by Azure Arc -> Internal Load Balancer: created
+  Internal Load Balancer -> Web Servers: restricts access
+  Web Servers -> Storage Server: stores data
+  Storage Server -> Azure Virtual Network: stores in
+}
+
+{'total_tokens': 2269, 'prompt_tokens': 0, 'completion_tokens': 2269, 'successful_requests': 16}

@@ -1,0 +1,30 @@
+This architecture hosts a basic web application using AWS services. It consists of: * **EC2 Instance (1):** A single EC2 instance running the web application. * **S3 Bucket (1):** An S3 bucket storing static website content (e.g., HTML, CSS, images). * **CloudFront Distribution (1):** A CloudFront distribution serving the web application content globally with low latency. The EC2 instance accesses the S3 bucket to retrieve static content and dynamically generate responses. CloudFront caches the content from the S3 bucket, providing faster delivery to users. The EC2 instance is directly connected to the internet, enabling users to access the web application.
+
+# result of user_input
+
+```
+vars: {
+  d2-config: {
+    layout-engine: elk
+    theme-id: 300
+  }
+}
+network: {
+  ec2_instance: {
+    shape: rectangle
+  }
+  s3_bucket: {
+    shape: cylinder
+  }
+  cloudfront_distribution: {
+    shape: cloud
+  }
+
+  ec2_instance -> s3_bucket: access
+  s3_bucket -> cloudfront_distribution: cache
+  cloudfront_distribution -> users: serve
+}
+```
+This code defines a valid D2 diagram that represents the architecture of a web application hosted on AWS, consisting of an EC2 instance, an S3 bucket, and a CloudFront distribution. The diagram correctly illustrates the relationships between the components.
+-----------------------------
+{'total_tokens': 2004, 'prompt_tokens': 0, 'completion_tokens': 2004, 'successful_requests': 19}

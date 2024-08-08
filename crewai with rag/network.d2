@@ -1,0 +1,26 @@
+vars: {
+  d2-config: {
+    layout-engine: elk
+    theme-id: 300
+  }
+}
+network: {
+  frontend_service {shape: rectangle}
+  api_gateway {shape: rectangle}
+  microservices {shape: rectangle}
+  sns_topic {shape: queue}
+  lambda_function {shape: step}
+  dynamodb_table_region_a {shape: cylinder}
+  dynamodb_table_region_b {shape: cylinder}
+  s3_bucket {shape: document}
+  redis_cache {shape: hexagon}
+
+  frontend_service -> api_gateway: interact
+  api_gateway -> microservices: route
+  microservices -> dynamodb_table_region_a: store
+  microservices -> sns_topic: publish
+  sns_topic -> lambda_function: trigger
+  lambda_function -> dynamodb_table_region_b: update
+  frontend_service -> s3_bucket: retrieve
+  frontend_service -> redis_cache: session
+}
